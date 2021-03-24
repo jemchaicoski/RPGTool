@@ -31,26 +31,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
-/*
-
-floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.person)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-
-child: Container(
-          height: 80,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Icon(icon, size: 40.0, color: Colors.white),
-                SizedBox.shrink(),
-                Icon(Icons.topic, size: 40.0, color: Colors.white),
-              ],
-            ),
-          ),
-        ),
-*/
