@@ -27,6 +27,7 @@ class NavegationBar extends StatelessWidget {
         ),
       ],
       selectedItemColor: Colors.red[800],
+      backgroundColor: Color(0xFFF7EAC3),
     );
   }
 }
