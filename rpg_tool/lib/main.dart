@@ -1,9 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:rpg_tool/AppLocalization.dart';
+import 'dart:math';
 import 'package:rpg_tool/widget/NavegationBar.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(new MaterialApp(home: new MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,6 +12,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFFFBF2D4)),
+      supportedLocales: [Locale('pt', 'BR'), Locale('en', 'US')],
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode &&
+              supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
     );
   }
 }
@@ -29,7 +45,7 @@ class MyHomePage extends StatelessWidget {
             Image(
               image: AssetImage('images/icons/dragon-head.png'),
             ),
-            Text(getRandomText())
+            Text(getRandomText(context))
           ],
         ),
       ),
@@ -38,28 +54,18 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-String getRandomText() {
-  String phrase1 = "Das piores histórias saem as grandes ideias.";
-  String phrase2 =
-      "Difícil é vida de vilão, que só aparece para morrer no final.";
-  String phrase3 =
-      "Ora, mas é só um goblin.\n -Frases ditas antes de morrer n°1";
-  String phrase4 = "Como assim critico?\n -Frases ditas antes de morrer n°2";
-  String phrase5 =
-      "Ufa, passei no reflexo, agora é só metade do dano.\n -Frases ditas antes de morrer n°3";
-  String phrase6 =
-      "Se eu morrer eu faço um mago.\n -Frases ditas antes de morrer n°4";
-
-  List<String> phraseList = new List(5);
-  phraseList[0] = phrase1;
-  phraseList[1] = phrase2;
-  phraseList[2] = phrase3;
-  phraseList[3] = phrase4;
-  phraseList[4] = phrase5;
+String getRandomText(BuildContext context) {
+  List<String> phraseList = new List(15);
+  String phrase;
+  for (int i = 0; i < phraseList.length; i++) {
+    phrase = "phrase" + i.toString();
+    print(AppLocalizations.of(context).translate(phrase));
+    phraseList[i] = AppLocalizations.of(context).translate(phrase);
+  }
 
   var rng = new Random();
   var generatedNumber;
-  generatedNumber = rng.nextInt(4);
-
+  generatedNumber = rng.nextInt(phraseList.length);
+  log(phraseList.length);
   return phraseList[generatedNumber];
 }
