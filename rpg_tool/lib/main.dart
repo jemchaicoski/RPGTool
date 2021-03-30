@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rpg_tool/AppLocalization.dart';
-import 'dart:math';
+import 'package:rpg_tool/utils/RandomText.dart';
 import 'package:rpg_tool/widget/NavegationBar.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFFFBF2D4)),
-      supportedLocales: [Locale('pt', 'BR'), Locale('en', 'US')],
+      supportedLocales: [
+        //const Locale('en'),
+        const Locale('pt'),
+      ],
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -32,8 +35,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final RandomText randomText = RandomText();
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[800],
@@ -45,27 +51,11 @@ class MyHomePage extends StatelessWidget {
             Image(
               image: AssetImage('images/icons/dragon-head.png'),
             ),
-            Text(getRandomText(context))
+            Text(AppLocalizations.of(context).translate("phrase1"))
           ],
         ),
       ),
       bottomNavigationBar: NavegationBar(),
     );
   }
-}
-
-String getRandomText(BuildContext context) {
-  List<String> phraseList = new List(15);
-  String phrase;
-  for (int i = 0; i < phraseList.length; i++) {
-    phrase = "phrase" + i.toString();
-    print(AppLocalizations.of(context).translate(phrase));
-    phraseList[i] = AppLocalizations.of(context).translate(phrase);
-  }
-
-  var rng = new Random();
-  var generatedNumber;
-  generatedNumber = rng.nextInt(phraseList.length);
-  log(phraseList.length);
-  return phraseList[generatedNumber];
 }

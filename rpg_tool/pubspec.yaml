@@ -26,6 +26,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -41,9 +42,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  generate: true
   assets:
     - images/icons/
-    - lang/pt-BR.json
+    - lang/pt_br.json
     - lang/en.json
 
   uses-material-design: true
+   

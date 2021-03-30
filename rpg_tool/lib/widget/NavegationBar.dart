@@ -8,6 +8,10 @@ class NavegationBar extends StatelessWidget {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Início',
+        ),
+        BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('images/icons/zakat.png'),
           ),
@@ -27,6 +31,7 @@ class NavegationBar extends StatelessWidget {
         ),
       ],
       selectedItemColor: Colors.red[800],
+      unselectedItemColor: Colors.grey, //cor de fundo do icone aqui
       backgroundColor: Color(0xFFF7EAC3),
     );
   }
